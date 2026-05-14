@@ -8,8 +8,8 @@ const auth = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "secretkey");
-    req.user = decoded; // attach user info
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; 
     next();
   } catch (err) {
     res.send("Invalid token");

@@ -1,7 +1,9 @@
 const db = require("../config/db");
 
 exports.addJob = (req, res) => {
+
   const { company, role, status } = req.body;
+
   const user_id = req.user.id;
 
   const query = `
@@ -9,69 +11,123 @@ exports.addJob = (req, res) => {
     VALUES (?, ?, ?, ?)
   `;
 
-  db.query(query, [user_id, company, role, status], (err) => {
-    if (err) {
-      console.log(err);
-      return res.send("Error adding job");
-    }
+  db.query(
+    query,
+    [user_id, company, role, status],
+    (err) => {
 
-    res.send("Job added");
-  });
+      if (err) {
+
+        console.log(err);
+
+        return res.status(500).json({
+          success: false,
+          message: "Database error"
+        });
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "Job added"
+      });
+    }
+  );
 };
 
 exports.getJobs = (req, res) => {
+
   const user_id = req.user.id;
 
-  const query = "SELECT * FROM jobs WHERE user_id = ?";
+  const query =
+    "SELECT * FROM jobs WHERE user_id = ?";
 
-  db.query(query, [user_id], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.send("Error fetching jobs");
+  db.query(
+    query,
+    [user_id],
+    (err, results) => {
+
+      if (err) {
+
+        console.log(err);
+
+        return res.status(500).json({
+          success: false,
+          message: "Database error"
+        });
+      }
+
+      res.status(200).json(results);
     }
-
-    res.json(result);
-  });
+  );
 };
 
 exports.updateJob = (req, res) => {
+
   const { id } = req.params;
-  const { company, role, status } = req.body;
+
+  const { status } = req.body;
+
   const user_id = req.user.id;
 
   const query = `
     UPDATE jobs
-    SET company = ?, role = ?, status = ?
+    SET status = ?
     WHERE id = ? AND user_id = ?
   `;
 
   db.query(
     query,
-    [company, role, status, id, user_id],
+    [status, id, user_id],
     (err) => {
+
       if (err) {
+
         console.log(err);
-        return res.send("Error updating job");
+
+        return res.status(500).json({
+          success: false,
+          message: "Database error"
+        });
       }
 
-      res.send("Job updated");
+      res.status(200).json({
+        success: true,
+        message: "Job updated"
+      });
     }
   );
 };
 
 exports.deleteJob = (req, res) => {
+
   const { id } = req.params;
+
   const user_id = req.user.id;
 
-  const query =
-    "DELETE FROM jobs WHERE id = ? AND user_id = ?";
+  const query = `
+    DELETE FROM jobs
+    WHERE id = ? AND user_id = ?
+  `;
 
-  db.query(query, [id, user_id], (err) => {
-    if (err) {
-      console.log(err);
-      return res.send("Error deleting job");
+  db.query(
+    query,
+    [id, user_id],
+    (err) => {
+
+      if (err) {
+
+        console.log(err);
+
+        return res.status(500).json({
+          success: false,
+          message: "Database error"
+        });
+      }
+
+      res.status(200).json({
+        success: true,
+        message: "Job deleted"
+      });
     }
-
-    res.send("Job deleted");
-  });
+  );
 };

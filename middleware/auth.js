@@ -4,15 +4,27 @@ const auth = (req, res, next) => {
   const token = req.headers["authorization"];
 
   if (!token) {
-    return res.send("No token");
+    return res.status(401).json({
+      success: false,
+      message: "No token provided"
+    });
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; 
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET
+    );
+
+    req.user = decoded;
+
     next();
-  } catch (err) {
-    res.send("Invalid token");
+
+  } catch (error) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid token"
+    });
   }
 };
 

@@ -16,7 +16,7 @@ const Dashboard = () => {
       const token = localStorage.getItem("token");
 
       const res = await axios.get(
-        "http://localhost:5000/jobs",
+        "https://job-tracker-api-bupk.onrender.com/jobs",
         {
           headers: {
             Authorization: token
@@ -42,17 +42,16 @@ const Dashboard = () => {
       const newStatus = prompt("Enter new status");
 
       await axios.put(
-        `http://localhost:5000/update-job/${id}`,
-        {
-          status: newStatus
-        },
-        {
-          headers: {
-            Authorization: token
-          }
-        }
-      );
-
+  `https://job-tracker-api-bupk.onrender.com/update-job/${id}`,
+  {
+    status: newStatus
+  },
+  {
+    headers: {
+      Authorization: token
+    }
+  }
+);
       fetchJobs();
 
     } catch (error) {
@@ -69,13 +68,13 @@ const Dashboard = () => {
       const token = localStorage.getItem("token");
 
       await axios.delete(
-        `http://localhost:5000/delete-job/${id}`,
-        {
-          headers: {
-            Authorization: token
-          }
-        }
-      );
+  `https://job-tracker-api-bupk.onrender.com/delete-job/${id}`,
+  {
+    headers: {
+      Authorization: token
+    }
+  }
+);
 
       fetchJobs();
 

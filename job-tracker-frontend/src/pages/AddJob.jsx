@@ -15,7 +15,7 @@ const AddJob = () => {
             console.log(token);
 
       const res = await axios.post(
-        "http://localhost:5000/add-job",
+        "https://job-tracker-api-bupk.onrender.com/add-job",
         {
           company,
           role,

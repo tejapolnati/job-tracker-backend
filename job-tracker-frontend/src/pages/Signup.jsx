@@ -12,7 +12,7 @@ function Signup() {
     try {
 
       const res = await axios.post(
-        "http://localhost:5000/signup",
+          "https://job-tracker-api-bupk.onrender.com/signup",
         {
           name,
           email,
@@ -66,7 +66,6 @@ function Signup() {
       <button onClick={handleSignup}>
         Signup
       </button>
-
     </div>
   );
 }

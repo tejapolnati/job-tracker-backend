@@ -1,35 +1,36 @@
 import { useState } from "react";
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleLogin = async () => {
-
     try {
-
       const res = await axios.post(
         "https://job-tracker-api-bupk.onrender.com/login",
         {
           email,
-          password
+          password,
         }
       );
 
-      localStorage.setItem(
-        "token",
-        res.data.token
-      );
+      localStorage.setItem("token", res.data.token);
 
       alert("Login successful");
 
+      navigate("/dashboard");
     } catch (error) {
-
       console.log(error);
 
-      alert("Login failed");
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
+      } else {
+        alert("Login failed");
+      }
     }
   };
 
@@ -40,10 +41,9 @@ function Login() {
         flexDirection: "column",
         width: "300px",
         margin: "100px auto",
-        gap: "10px"
+        gap: "10px",
       }}
     >
-
       <h1>Login</h1>
 
       <input
@@ -64,6 +64,10 @@ function Login() {
         Login
       </button>
 
+      <p>
+        Don't have an account?{" "}
+        <Link to="/signup">Sign Up</Link>
+      </p>
     </div>
   );
 }

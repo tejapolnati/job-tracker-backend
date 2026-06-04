@@ -13,9 +13,15 @@ const AddJob = () => {
     try {
       const token = localStorage.getItem("token");
 
-      console.log(token);
+      console.log("TOKEN:", token);
 
-      await axios.post(
+      if (!token) {
+        alert("No token found. Please login again.");
+        navigate("/login");
+        return;
+      }
+
+      const res = await axios.post(
         "https://job-tracker-api-bupk.onrender.com/add-job",
         {
           company,
@@ -29,25 +35,23 @@ const AddJob = () => {
         }
       );
 
+      console.log("SUCCESS:", res.data);
+
       alert("Job Added");
 
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
-      alert("Failed to add job");
+      console.log("ERROR RESPONSE:", error.response?.data);
+
+      alert(
+        error.response?.data?.message ||
+        "Request failed. Check backend auth."
+      );
     }
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "300px",
-        margin: "100px auto",
-        gap: "10px",
-      }}
-    >
+    <div style={{ display: "flex", flexDirection: "column", width: "300px", margin: "100px auto", gap: "10px" }}>
       <h1>Add Job</h1>
 
       <input

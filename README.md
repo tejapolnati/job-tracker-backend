@@ -1,101 +1,99 @@
-# Job Tracker Backend API
+# Job Tracker Application
 
-A secure backend API for tracking job applications with JWT authentication and MySQL database integration.
+A full-stack job application tracking system that helps users manage and monitor their job search process efficiently.
 
----
+## Live Demo
+
+Frontend: https://job-tracker-frontend-pi-steel.vercel.app
 
 ## Features
 
-- User Signup
-- User Login with JWT Authentication
-- Protected Routes
-- Add Job Application
-- Fetch User Jobs
-- Update Job Details
-- Delete Job Application
-
----
+* User Registration and Login
+* JWT Authentication
+* Add Job Applications
+* Edit Job Details
+* Delete Applications
+* Track Application Status
+* Dashboard with Job Statistics
+* Responsive Design
+* Protected Routes
 
 ## Tech Stack
 
-- Node.js
-- Express.js
-- MySQL
-- JWT Authentication
-- bcrypt
-- Postman
+### Frontend
 
----
+* React.js
+* React Router
+* Axios
+* CSS
 
-## API Endpoints
+### Backend
 
-### Auth Routes
+* Node.js
+* Express.js
+* MySQL
+* JWT Authentication
+* bcrypt
 
-| Method | Endpoint | Description       |
-| ------ | -------- | ----------------- |
-| POST   | /signup  | Register new user |
-| POST   | /login   | Login user        |
+## Project Structure
 
----
+### Frontend
 
-### Job Routes
+```text
+src/
+├── components/
+├── pages/
+├── services/
+├── context/
+├── App.jsx
+└── main.jsx
+```
 
-| Method | Endpoint        | Description       |
-| ------ | --------------- | ----------------- |
-| POST   | /add-job        | Add new job       |
-| GET    | /jobs           | Get all user jobs |
-| PUT    | /update-job/:id | Update job        |
-| DELETE | /delete-job/:id | Delete job        |
+### Backend
 
----
+```text
+server/
+├── controllers/
+├── routes/
+├── middleware/
+├── config/
+└── server.js
+```
 
 ## Installation
 
+### Frontend
+
 ```bash
-git clone <your_repo_url>
+git clone <frontend-repository-url>
+cd job-tracker-frontend
+npm install
+npm run dev
+```
+
+### Backend
+
+```bash
+git clone <backend-repository-url>
 cd job-tracker-backend
 npm install
+npm start
 ```
 
----
+## Learning Outcomes
 
-## Run Server
+Through this project, I gained practical experience in:
 
-```bash
-node server.js
-```
-
----
-
-## Environment Variables
-
-Create a `.env` file:
-
-```env
-JWT_SECRET=your_secret_key
-DB_NAME=job_tracker
-```
-
----
-
-## Sample Protected Header
-
-```text
-Authorization: your_jwt_token
-```
-
----
-
-## Future Improvements
-
-- Role-based authentication
-- Pagination
-- Search & filtering
-- Deployment
-- Frontend integration
-
----
+* Building REST APIs
+* Authentication and Authorization
+* React State Management
+* Database Design with MySQL
+* Full-Stack Application Deployment
+* CRUD Operations
+* Error Handling and Validation
 
 ## Author
 
-Teja
+Teja Polnati
+
+Aspiring Full Stack / MERN Developer

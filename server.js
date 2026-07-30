@@ -15,7 +15,6 @@ app.use(express.json());
 
 app.use("/", authRoutes);
 app.use("/", jobRoutes);
-
 app.get("/", (req, res) => {
   res.send("Server working");
 });
